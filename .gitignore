@@ -40,3 +40,5 @@ Icon
 *.bak
 *.dex
 *.jar
+*.apk
+/bin/*
