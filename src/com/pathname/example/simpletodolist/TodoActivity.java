@@ -3,8 +3,11 @@ package com.pathname.example.simpletodolist;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+
+import com.activeandroid.query.Select;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,8 +23,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class TodoActivity extends Activity {
-	ArrayList<String> items;
-	ArrayAdapter<String> itemsAdapter;
 	
 	ListView lvItems;
 	private final int REQUEST_CODE = 20;
@@ -31,7 +32,7 @@ public class TodoActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_todo);
 		
-		ArrayList<TodoItem> searchResults = GetSearchResults();
+		List<TodoItem> searchResults = GetSearchResults();
 		
 		lvItems = (ListView) findViewById(R.id.lvItems);
 		
@@ -43,7 +44,8 @@ public class TodoActivity extends Activity {
 		//setupListViewListener();
 		//setupClickListener();
 	}
-	
+
+	/*
 	private void setupListViewListener(){
 		lvItems.setOnItemLongClickListener(new OnItemLongClickListener(){
 			@Override
@@ -93,20 +95,31 @@ public class TodoActivity extends Activity {
 			e.printStackTrace();
 		}
 	}
+	*/
 	
 	
-	private ArrayList<TodoItem> GetSearchResults(){
-	     ArrayList<TodoItem> results = new ArrayList<TodoItem>();
-	     
-	     TodoItem sr1 = new TodoItem();
-	     sr1.title = "Socks";
-	     sr1.duedate = "2014-08-31";
-	     sr1.priority = 1;
-	     results.add(sr1);
-	     return results;
+	private List<TodoItem> GetSearchResults(){
+	     List<TodoItem> items = getAll();
+	     if (items.isEmpty()) {
+	    	 // Save one example item.
+	    	 TodoItem item = new TodoItem();
+	    	 item.title = "Please add a description of what you want to do";
+	    	 item.duedate = "Due date here";
+	    	 item.priority = 1;
+	    	 item.save();
+	    	 items = getAll();
+	     }
+	     return items; 
     }
 	
-	
+	public static List<TodoItem> getAll() {
+	    return new Select()
+	        .from(TodoItem.class)
+	        .orderBy("title asc")
+	        .execute();
+	}
+
+	/*
 	public void addTodoItem(View v) {
 
 		EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
@@ -131,4 +144,5 @@ public class TodoActivity extends Activity {
 		     Toast.makeText(this, itemText, Toast.LENGTH_SHORT).show();
 		  }
 		} 
+	*/
 }

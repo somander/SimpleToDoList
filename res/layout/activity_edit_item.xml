@@ -16,6 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="53dp"
         android:ems="10"
+        android:hint="@string/todoItem"
         android:text="@string/editTodoItem" />
 
     <Button
@@ -27,5 +28,30 @@
         android:onClick="onSubmit"
         android:layout_alignParentRight="true"
         android:text="@string/btnEditTodoItem" />
+
+    <EditText
+        android:id="@+id/etDuedate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etEditTodoItem"
+        android:layout_below="@+id/btnEditItem"
+        android:layout_marginTop="51dp"
+        android:ems="10"
+        android:hint="@string/duedate"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/etPriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etDuedate"
+        android:layout_below="@+id/etDuedate"
+        android:layout_marginTop="61dp"
+        android:ems="10"
+        android:hint="@string/priority"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>

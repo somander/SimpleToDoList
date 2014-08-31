@@ -1,6 +1,6 @@
 package com.pathname.example.simpletodolist;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,11 +10,11 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class TodoAdapter extends BaseAdapter {
-	private static ArrayList<TodoItem> searchArrayList;
+	private static List<TodoItem> searchArrayList;
 	 
 	 private LayoutInflater mInflater;
 
-	 public TodoAdapter(Context context, ArrayList<TodoItem> results) {
+	 public TodoAdapter(Context context, List<TodoItem> results) {
 	  searchArrayList = results;
 	  mInflater = LayoutInflater.from(context);
 	 }

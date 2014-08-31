@@ -42,3 +42,4 @@ Icon
 *.jar
 *.apk
 /bin/*
+/gen/*

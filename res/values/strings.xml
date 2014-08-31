@@ -10,5 +10,7 @@
     <string name="btnEditTodoItem">Submit</string>
     <string name="etEditTodoItem"></string>
     <string name="editTodoItem"></string>
+    <string name="duedate">Add due date</string>
+    <string name="priority">1</string>
 
 </resources>
