@@ -22,6 +22,7 @@ import android.widget.Toast;
 public class TodoActivity extends Activity {
 	ArrayList<String> items;
 	ArrayAdapter<String> itemsAdapter;
+	
 	ListView lvItems;
 	private final int REQUEST_CODE = 20;
 	
@@ -29,12 +30,18 @@ public class TodoActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_todo);
+		
+		ArrayList<TodoItem> searchResults = GetSearchResults();
+		
 		lvItems = (ListView) findViewById(R.id.lvItems);
-		readItems();
-		itemsAdapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_list_item_1, items);
-		lvItems.setAdapter(itemsAdapter);
-		setupListViewListener();
-		setupClickListener();
+		
+		lvItems.setAdapter(new TodoAdapter(this, searchResults));
+		
+		//readItems();
+		//itemsAdapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_list_item_1, items);
+		//lvItems.setAdapter(itemsAdapter);
+		//setupListViewListener();
+		//setupClickListener();
 	}
 	
 	private void setupListViewListener(){
@@ -86,6 +93,19 @@ public class TodoActivity extends Activity {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	private ArrayList<TodoItem> GetSearchResults(){
+	     ArrayList<TodoItem> results = new ArrayList<TodoItem>();
+	     
+	     TodoItem sr1 = new TodoItem();
+	     sr1.title = "Socks";
+	     sr1.duedate = "2014-08-31";
+	     sr1.priority = 1;
+	     results.add(sr1);
+	     return results;
+    }
+	
 	
 	public void addTodoItem(View v) {
 
