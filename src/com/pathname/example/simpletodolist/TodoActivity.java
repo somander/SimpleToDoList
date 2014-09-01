@@ -23,7 +23,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class TodoActivity extends Activity {
-	
+	TodoAdapter todoadapter;
 	ListView lvItems;
 	private final int REQUEST_CODE = 20;
 	
@@ -32,15 +32,12 @@ public class TodoActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_todo);
 		
-		List<TodoItem> searchResults = GetSearchResults();
+		List<TodoItem> todoResults = GetTodoItems();
 		
 		lvItems = (ListView) findViewById(R.id.lvItems);
+		todoadapter = new TodoAdapter(this, todoResults);
+		lvItems.setAdapter(todoadapter);
 		
-		lvItems.setAdapter(new TodoAdapter(this, searchResults));
-		
-		//readItems();
-		//itemsAdapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_list_item_1, items);
-		//lvItems.setAdapter(itemsAdapter);
 		//setupListViewListener();
 		//setupClickListener();
 	}
@@ -98,7 +95,7 @@ public class TodoActivity extends Activity {
 	*/
 	
 	
-	private List<TodoItem> GetSearchResults(){
+	private List<TodoItem> GetTodoItems(){
 	     List<TodoItem> items = getAll();
 	     if (items.isEmpty()) {
 	    	 // Save one example item.
@@ -119,30 +116,33 @@ public class TodoActivity extends Activity {
 	        .execute();
 	}
 
-	/*
+	
 	public void addTodoItem(View v) {
-
+		TodoItem newTodo = new TodoItem();
 		EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
-		itemsAdapter.add(etNewItem.getText().toString());
+		EditText etNewDueDate = (EditText) findViewById(R.id.etNewDueDate);
+		newTodo.title = etNewItem.getText().toString();
+		newTodo.duedate = etNewDueDate.getText().toString();
+		newTodo.priority = 1;
+		newTodo.save();
+		todoadapter.add(newTodo);
 		
 		String addedMsg = etNewItem.getText().toString() + " added";
 		Toast.makeText(this, addedMsg, Toast.LENGTH_SHORT).show();
 		
 		etNewItem.setText("");
-		saveItems();
+		etNewDueDate.setText("");
 	}
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		  if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
 		     String itemText = data.getExtras().getString("itemText");
-		     int itemPosition = data.getExtras().getInt("itemPosition");
-		     items.remove(itemPosition);
-		     itemsAdapter.insert(itemText, itemPosition);
-		     itemsAdapter.notifyDataSetChanged();
-		     saveItems();
+		     //int itemPosition = data.getExtras().getInt("itemPosition");
+		     //items.remove(itemPosition);
+		     //itemsAdapter.insert(itemText, itemPosition);
+		     todoadapter.notifyDataSetChanged();
 		     itemText = itemText + " updated";
 		     Toast.makeText(this, itemText, Toast.LENGTH_SHORT).show();
 		  }
 		} 
-	*/
 }

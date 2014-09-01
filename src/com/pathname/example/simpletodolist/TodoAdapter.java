@@ -10,21 +10,26 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class TodoAdapter extends BaseAdapter {
-	private static List<TodoItem> searchArrayList;
+	private static List<TodoItem> todoList;
 	 
 	 private LayoutInflater mInflater;
 
 	 public TodoAdapter(Context context, List<TodoItem> results) {
-	  searchArrayList = results;
+	  todoList = results;
 	  mInflater = LayoutInflater.from(context);
+	 }
+	 
+	 public void add(TodoItem todo) {
+		 todoList.add(todo);
+		 
 	 }
 
 	 public int getCount() {
-	  return searchArrayList.size();
+	  return todoList.size();
 	 }
 
 	 public Object getItem(int position) {
-	  return searchArrayList.get(position);
+	  return todoList.get(position);
 	 }
 
 	 public long getItemId(int position) {
@@ -45,9 +50,9 @@ public class TodoAdapter extends BaseAdapter {
 	   holder = (ViewHolder) convertView.getTag();
 	  }
 	  
-	  holder.txtTitle.setText(searchArrayList.get(position).title);
-	  holder.txtDueDate.setText(searchArrayList.get(position).duedate);
-	  holder.txtPriority.setText(Integer.toString(searchArrayList.get(position).priority));
+	  holder.txtTitle.setText(todoList.get(position).title);
+	  holder.txtDueDate.setText(todoList.get(position).duedate);
+	  holder.txtPriority.setText(Integer.toString(todoList.get(position).priority));
 
 	  return convertView;
 	 }

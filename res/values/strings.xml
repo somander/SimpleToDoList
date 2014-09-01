@@ -12,5 +12,7 @@
     <string name="editTodoItem"></string>
     <string name="duedate">Add due date</string>
     <string name="priority">1</string>
+    <string name="editItem">Edit todo</string>
+    <string name="newDueDate">Enter due date</string>
 
 </resources>

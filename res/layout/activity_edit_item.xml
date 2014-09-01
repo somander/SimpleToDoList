@@ -14,31 +14,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="53dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="49dp"
         android:ems="10"
-        android:hint="@string/todoItem"
+        android:hint="@string/editItem"
         android:text="@string/editTodoItem" />
 
     <Button
         android:id="@+id/btnEditItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/etEditTodoItem"
-        android:layout_alignBottom="@+id/etEditTodoItem"
-        android:onClick="onSubmit"
         android:layout_alignParentRight="true"
+        android:layout_below="@+id/etPriority"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="60dp"
+        android:onClick="onSubmit"
         android:text="@string/btnEditTodoItem" />
-
-    <EditText
-        android:id="@+id/etDuedate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/etEditTodoItem"
-        android:layout_below="@+id/btnEditItem"
-        android:layout_marginTop="51dp"
-        android:ems="10"
-        android:hint="@string/duedate"
-        android:inputType="date" />
 
     <EditText
         android:id="@+id/etPriority"
@@ -46,12 +37,20 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/etDuedate"
         android:layout_below="@+id/etDuedate"
-        android:layout_marginTop="61dp"
+        android:layout_marginTop="26dp"
         android:ems="10"
         android:hint="@string/priority"
-        android:inputType="number" >
+        android:inputType="number" />
 
-        <requestFocus />
-    </EditText>
+    <EditText
+        android:id="@+id/etDuedate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etEditTodoItem"
+        android:layout_below="@+id/etEditTodoItem"
+        android:layout_marginTop="27dp"
+        android:ems="10"
+        android:hint="@string/duedate"
+        android:inputType="date" />
 
 </RelativeLayout>

@@ -7,7 +7,7 @@
     <ListView
         android:id="@+id/lvItems"
         android:layout_width="match_parent"
-        android:layout_height= "380dp"
+        android:layout_height= "320dp"
         android:layout_centerHorizontal="true" 
         android:layout_alignParentTop="true">
 
@@ -26,13 +26,22 @@
         android:id="@+id/etNewItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginBottom="16dp"
+        android:layout_below="@+id/lvItems"
         android:ems="10"
         android:hint="@string/todoItem" >
 
         <requestFocus />
     </EditText>
+
+    <EditText
+        android:id="@+id/etNewDueDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btnAddItem"
+        android:ems="10"
+        android:hint="@string/newDueDate"
+        android:inputType="date" />
 
 </RelativeLayout>
