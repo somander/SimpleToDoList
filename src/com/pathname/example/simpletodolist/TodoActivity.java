@@ -38,27 +38,28 @@ public class TodoActivity extends Activity {
 		todoadapter = new TodoAdapter(this, todoResults);
 		lvItems.setAdapter(todoadapter);
 		
-		//setupListViewListener();
+		setupListViewListener();
 		//setupClickListener();
 	}
 
-	/*
 	private void setupListViewListener(){
 		lvItems.setOnItemLongClickListener(new OnItemLongClickListener(){
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long rowId){
 				
-				String deletedMsg = items.get(position).toString() + " deleted";
+				TodoItem itemToRemove = (TodoItem) todoadapter.getItem(position);
+				
+				String deletedMsg = itemToRemove.title + " deleted";
 				Toast.makeText(parent.getContext(), deletedMsg, Toast.LENGTH_SHORT).show();
 				
-				items.remove(position);
-				itemsAdapter.notifyDataSetChanged();
-				saveItems();
+				itemToRemove.delete();
+				todoadapter.remove(position);
+				todoadapter.notifyDataSetChanged();
 				return true;
 			}
 		});
 	}
-	
+	/*
 	private void setupClickListener(){
 		lvItems.setOnItemClickListener(new OnItemClickListener(){
 

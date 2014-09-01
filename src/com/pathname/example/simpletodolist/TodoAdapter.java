@@ -23,6 +23,10 @@ public class TodoAdapter extends BaseAdapter {
 		 todoList.add(todo);
 		 
 	 }
+	 
+	 public void remove(int position) {
+		 todoList.remove(position);
+	 }
 
 	 public int getCount() {
 	  return todoList.size();
