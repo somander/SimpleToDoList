@@ -16,15 +16,25 @@ public class EditItemActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_item);
 		String itemText = getIntent().getStringExtra("itemText");
+		String itemDueDate = getIntent().getStringExtra("itemDueDate");
+		int itemPriority = getIntent().getIntExtra("itemPriority", 0);
 		itemPosition = getIntent().getIntExtra("itemPosition", 0);
 		EditText etEditedItem = (EditText) findViewById(R.id.etEditTodoItem);
+		EditText etDuedate = (EditText) findViewById(R.id.etDuedate);
+		EditText etPriority = (EditText) findViewById(R.id.etPriority);
 		etEditedItem.setText(itemText);
+		etDuedate.setText(itemDueDate);
+		etPriority.setText(String.valueOf(itemPriority));
 	}
 	
 	public void onSubmit(View v) {
 		  EditText etEditItem = (EditText) findViewById(R.id.etEditTodoItem);
+		  EditText etDuedate = (EditText) findViewById(R.id.etDuedate);
+		  EditText etPriority = (EditText) findViewById(R.id.etPriority);
 		  Intent data = new Intent();
 		  data.putExtra("itemText", etEditItem.getText().toString());
+		  data.putExtra("itemDuedate", etDuedate.getText().toString());
+		  data.putExtra("itemPriority", Integer.valueOf(etPriority.getText().toString()));
 		  data.putExtra("itemPosition", itemPosition);
 		  setResult(RESULT_OK, data);
 		  finish();

@@ -39,7 +39,7 @@ public class TodoActivity extends Activity {
 		lvItems.setAdapter(todoadapter);
 		
 		setupListViewListener();
-		//setupClickListener();
+		setupClickListener();
 	}
 
 	private void setupListViewListener(){
@@ -59,43 +59,22 @@ public class TodoActivity extends Activity {
 			}
 		});
 	}
-	/*
+	
 	private void setupClickListener(){
 		lvItems.setOnItemClickListener(new OnItemClickListener(){
 
 			public void onItemClick(AdapterView<?> parent, View view, int position, long rowId){
 				  Intent i = new Intent(TodoActivity.this, EditItemActivity.class);
-				  String itemText = items.get(position);
-				  i.putExtra("itemText", itemText); 
+				  TodoItem itemToEdit = (TodoItem) todoadapter.getItem(position);
+				  i.putExtra("itemText", itemToEdit.title); 
+				  i.putExtra("itemDueDate", itemToEdit.duedate); 
+				  i.putExtra("itemPriority", itemToEdit.priority); 
 				  i.putExtra("itemPosition", position);
 				  startActivityForResult(i, REQUEST_CODE);
 			}
 		});
 	}
-	
-	private void readItems() {
-		File filesDir = getFilesDir();
-		File todoFile = new File(filesDir, "todo.txt");
-		try {
-			items = new ArrayList<String>(FileUtils.readLines(todoFile));
-		} catch (IOException e) {
-			items = new ArrayList<String>();
-			e.printStackTrace();
-		}
-	}
-			
-	private void saveItems() {
-		File filesDir = getFilesDir();
-		File todoFile = new File(filesDir, "todo.txt");
-		try{
-			FileUtils.writeLines(todoFile, items);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	*/
-	
-	
+
 	private List<TodoItem> GetTodoItems(){
 	     List<TodoItem> items = getAll();
 	     if (items.isEmpty()) {
@@ -113,7 +92,7 @@ public class TodoActivity extends Activity {
 	public static List<TodoItem> getAll() {
 	    return new Select()
 	        .from(TodoItem.class)
-	        .orderBy("title asc")
+	        .orderBy("duedate asc")
 	        .execute();
 	}
 
@@ -137,13 +116,13 @@ public class TodoActivity extends Activity {
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		  if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-		     String itemText = data.getExtras().getString("itemText");
-		     //int itemPosition = data.getExtras().getInt("itemPosition");
-		     //items.remove(itemPosition);
-		     //itemsAdapter.insert(itemText, itemPosition);
+			 TodoItem itemChanged = todoadapter.get(data.getExtras().getInt("itemPosition"));
+			 itemChanged.title = data.getExtras().getString("itemText");
+			 itemChanged.duedate = data.getExtras().getString("itemDuedate");
+			 itemChanged.priority = data.getExtras().getInt("itemPriority");
+		     itemChanged.save();
 		     todoadapter.notifyDataSetChanged();
-		     itemText = itemText + " updated";
-		     Toast.makeText(this, itemText, Toast.LENGTH_SHORT).show();
+		     Toast.makeText(this, itemChanged.title + " updated", Toast.LENGTH_SHORT).show();
 		  }
 		} 
 }

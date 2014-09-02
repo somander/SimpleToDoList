@@ -27,6 +27,11 @@ public class TodoAdapter extends BaseAdapter {
 	 public void remove(int position) {
 		 todoList.remove(position);
 	 }
+	 
+	 public TodoItem get(int position) {
+		 TodoItem itemtodo = todoList.get(position);
+		 return itemtodo;
+	 }
 
 	 public int getCount() {
 	  return todoList.size();
