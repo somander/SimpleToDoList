@@ -1,11 +1,6 @@
 package com.pathname.example.simpletodolist;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.io.FileUtils;
 
 import com.activeandroid.query.Select;
 
@@ -13,11 +8,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -101,17 +94,26 @@ public class TodoActivity extends Activity {
 		TodoItem newTodo = new TodoItem();
 		EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
 		EditText etNewDueDate = (EditText) findViewById(R.id.etNewDueDate);
+		EditText etNewPriority = (EditText) findViewById(R.id.etNewPriority);
 		newTodo.title = etNewItem.getText().toString();
 		newTodo.duedate = etNewDueDate.getText().toString();
-		newTodo.priority = 1;
+		try {
+			newTodo.priority = Integer.valueOf(etNewPriority.getText().toString());
+		}
+		catch (Exception e) {
+			newTodo.priority = 1;
+		}
 		newTodo.save();
-		todoadapter.add(newTodo);
+		List<TodoItem> todoResults = GetTodoItems();
+		todoadapter.setItems(todoResults);
+		todoadapter.notifyDataSetChanged();
 		
 		String addedMsg = etNewItem.getText().toString() + " added";
 		Toast.makeText(this, addedMsg, Toast.LENGTH_SHORT).show();
 		
 		etNewItem.setText("");
 		etNewDueDate.setText("");
+		etNewPriority.setText("");
 	}
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -119,8 +121,16 @@ public class TodoActivity extends Activity {
 			 TodoItem itemChanged = todoadapter.get(data.getExtras().getInt("itemPosition"));
 			 itemChanged.title = data.getExtras().getString("itemText");
 			 itemChanged.duedate = data.getExtras().getString("itemDuedate");
-			 itemChanged.priority = data.getExtras().getInt("itemPriority");
+			 try {
+				 itemChanged.priority = data.getExtras().getInt("itemPriority");
+			 }
+			 catch (Exception e) {
+				 itemChanged.priority = 1;
+			 }
+			 
 		     itemChanged.save();
+		     List<TodoItem> todoResults = GetTodoItems();
+		     todoadapter.setItems(todoResults);
 		     todoadapter.notifyDataSetChanged();
 		     Toast.makeText(this, itemChanged.title + " updated", Toast.LENGTH_SHORT).show();
 		  }

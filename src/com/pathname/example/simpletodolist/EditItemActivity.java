@@ -34,7 +34,13 @@ public class EditItemActivity extends Activity {
 		  Intent data = new Intent();
 		  data.putExtra("itemText", etEditItem.getText().toString());
 		  data.putExtra("itemDuedate", etDuedate.getText().toString());
-		  data.putExtra("itemPriority", Integer.valueOf(etPriority.getText().toString()));
+		  try {
+			  data.putExtra("itemPriority", Integer.valueOf(etPriority.getText().toString()));
+		  }
+		  catch (Exception e) {
+			  data.putExtra("itemPriority", 1);
+		  }
+		  
 		  data.putExtra("itemPosition", itemPosition);
 		  setResult(RESULT_OK, data);
 		  finish();

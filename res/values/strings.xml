@@ -14,5 +14,8 @@
     <string name="priority">1</string>
     <string name="editItem">Edit todo</string>
     <string name="newDueDate">Enter due date</string>
+    <string name="todoPriority">Enter priority</string>
+    <string name="newPriority">Enter priority</string>
+    <color name="ligthblue">#BFEFFF</color>
 
 </resources>

@@ -28,6 +28,10 @@ public class TodoAdapter extends BaseAdapter {
 		 todoList.remove(position);
 	 }
 	 
+	 public void setItems(List<TodoItem> updatedList) {
+		 todoList = updatedList;
+	 }
+	 
 	 public TodoItem get(int position) {
 		 TodoItem itemtodo = todoList.get(position);
 		 return itemtodo;

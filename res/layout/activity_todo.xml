@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/ligthblue"
     tools:context="${relativePackage}.${activityClass}" >
 
     <ListView
@@ -13,19 +14,11 @@
 
     </ListView>
 
-    <Button
-        android:id="@+id/btnAddItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/etNewItem"
-        android:onClick="addTodoItem"
-        android:text="@string/addItem" />
-
     <EditText
         android:id="@+id/etNewItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="14sp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/lvItems"
         android:ems="10"
@@ -35,13 +28,36 @@
     </EditText>
 
     <EditText
+        android:id="@+id/etNewPriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/etNewDueDate"
+        android:ems="10"
+        android:hint="@string/newPriority"
+        android:inputType="number" />
+
+    <EditText
         android:id="@+id/etNewDueDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="14sp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/btnAddItem"
+        android:layout_below="@+id/etNewItem"
         android:ems="10"
         android:hint="@string/newDueDate"
         android:inputType="date" />
+
+    <Button
+        android:id="@+id/btnAddItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/etNewPriority"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="25dp"
+        android:onClick="addTodoItem"
+        android:text="@string/addItem"
+        android:textSize="14sp" />
 
 </RelativeLayout>
